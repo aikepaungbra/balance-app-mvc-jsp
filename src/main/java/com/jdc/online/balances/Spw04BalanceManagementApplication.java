@@ -3,6 +3,7 @@ package com.jdc.online.balances;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class Spw04BalanceManagementApplication {
 
