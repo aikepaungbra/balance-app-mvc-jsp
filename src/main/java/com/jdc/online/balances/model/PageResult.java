@@ -1,5 +1,6 @@
 package com.jdc.online.balances.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record PageResult<T>(
@@ -8,6 +9,44 @@ public record PageResult<T>(
 		int size,
 		int page
 		) {
+	
+	public int getTotalPages() {
+		
+		Long totalpage = count / size;
+		
+		if(count % size > 0) {
+			totalpage += 1;
+		}
+		
+		return totalpage.intValue();
+		
+	}
+	
+	public List<Integer> getPageLinks(){
+		
+		var totalPages = getTotalPages();
+		var links = new ArrayList<Integer>();
+		
+		if(totalPages > 0) {
+			
+			links.add(page);
+			
+			while(links.getFirst() > 0 && links.size() < 3) {
+				links.addFirst(links.getFirst() - 1);
+			}
+			
+			while(links.getLast() < totalPages && links.size() < 5) {
+				links.addLast(links.getLast() + 1);
+			}
+			
+			while(links.getFirst() > 0 && links.size() < 5) {
+				links.addFirst(links.getFirst() - 1);
+			}
+			
+		}
+		
+		return links;
+	}
 	
 	public static <T> Builder<T> builder() {
 		return new Builder<>();

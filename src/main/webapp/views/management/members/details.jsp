@@ -5,10 +5,10 @@
 <app:layout-management title="MEMBERS">
 
 		<div class="d-flex justify-content-between align-items-start">
-			<app:page-title title="Member Management"/>
-			<button class="btn btn-danger">
-				<i class="bi-x"></i>De-Activate
-			</button>
+		<app:page-title title="Member Management" />
+		<button id="statusChangeBtn" class="btn btn-danger">
+			<i class="${result.status() eq 'Active' ? 'bi-x' : 'bi-check'}"></i> ${result.status() eq 'Active' ? 'Denined' : 'Activate'}
+		</button>
 		</div>
 		
 		
@@ -27,31 +27,39 @@
 					<app:information-card label="Registered At" 
 						icon="bi-person-plus" 
 						bgColor="text-bg-info" 
-						value="2025-01-01 10:00" />
+						value="${dtf.formatDateTime(result.registeredAt())}" />
 					
 				</div>
 				<div class="col">
 					<app:information-card label="Last Access" 
 						icon="bi-calendar-check" 
 						bgColor="text-bg-secondary" 
-						value="2025-01-01 10:00" />
+						value="${dtf.formatDateTime(result.lastAccessAt())}" />
 
 				</div>
 				<div class="col">
 					<app:information-card label="Status" 
 						icon="bi-shield" 
 						bgColor="text-bg-primary" 
-						value="Active" />
+						value="${result.status()}" />
 				</div>
 			</div>
 			
-			<div class="row mt-4">
+			<div class="row mt-4 d-flex align-items-stretch">
 				<div class="col">
-					<app:personal-info />
+					<app:personal-info 
+					name="${result.name()}"
+					dob="${result.dateOfBirth()}" 
+					gender="${result.gender()}"
+					/>
 				</div>
 				
 				<div class="col">
-					<app:contact-info />
+					<app:contact-info
+					phone="${result.phone()}"
+					email="${result.email()}"
+					address="${result.displayAddress}"
+					 />
 				</div>
 			</div>			
 		</div>

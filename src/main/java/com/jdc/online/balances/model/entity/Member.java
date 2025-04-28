@@ -44,5 +44,8 @@ public class Member extends AbstractEntity {
     private LocalDate dob;
 
     private String profileImage;
+    
+    @OneToOne(mappedBy = "member")
+	private MemberActivity activity;
 
 }
