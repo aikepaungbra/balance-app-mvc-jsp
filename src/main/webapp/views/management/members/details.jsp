@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <app:layout-management title="MEMBERS">
 
@@ -65,5 +66,33 @@
 		</div>
 			
 		</div>
+		
+		<div id="statusChangeDialog" class="modal">
+		<div class="modal-dialog">
+			<form action="${root}/admin/member/${result.id()}/update" method="post" class="modal-content">
+				<sec:csrfInput/>
+				<input type="hidden" name="status" value="${result.status() ne 'Active'}" />
+				
+				<div class="modal-header">
+					<h5 class="modal-title">${result.status() eq 'Active' ? 'Denied' : 'Activate'} Access</h5>
+				</div>
+				
+				<div class="modal-body">
+					<app:form-group label="Reason">
+						<textarea name="reason" class="form-control" required="required"></textarea>
+					</app:form-group>
+				</div>
+				
+				<div class="modal-footer">
+					<button class="btn btn-outline-primary">
+						<i class="bi-save"></i> Change Status
+					</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="${root}/resources/js/member-details.js"></script>
 	
 </app:layout-management>
