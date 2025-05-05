@@ -17,7 +17,7 @@
 		
 			<div class="col-3">
 			
-				<img class="img-fluid img-thumbnail profile-image" alt="Profile Image" src="${root}/resources/photos/profile.jpg">
+				<img class="img-fluid img-thumbnail profile-image" alt="Profile Image" src="${root}/resources/photos/${result.profileImage()}">
 				
 			</div>
 			

@@ -52,8 +52,6 @@ public class MemberManagementService {
 	
 	public PageResult<MemberListItem> search(MemberSearch search, int page, int size) {
 		
-		
-		
 		return memberRepo.search(queryFunc(search), countFunc(search), page, size);
 	}
 	
