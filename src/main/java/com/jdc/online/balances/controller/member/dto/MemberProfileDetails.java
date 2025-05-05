@@ -25,15 +25,16 @@ public record MemberProfileDetails(
 		var builder = new Builder();
 		builder.id(entity.getId())
 			.email(entity.getEmail())
+			.profileImage(Optional.ofNullable(entity).map(a -> a.getProfileImage()).orElse("default-profile.png"))
 			.name(entity.getName())
 			.phone(entity.getPhone())
 			.registeredAt(entity.getActivity().getRegisteredAt())
 			.lastAccessAt(entity.getActivity().getLastAccessAt());
 		
 		var list = List.of(
-				entity.getAddress(),
+				Optional.ofNullable(entity.getAddress()).orElse(""),
 				Optional.ofNullable(entity.getTownship()).map(a -> a.getName()).orElse(""),
-				Optional.ofNullable(entity.getTownship().getDistrict().getRegion()).map(a -> a.getName()).orElse("")
+				Optional.ofNullable(entity.getTownship()).map(a -> a.getDistrict()).map(a -> a.getName()).orElse("")
 				);
 		
 		var address = list.stream()
